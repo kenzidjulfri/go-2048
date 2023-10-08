@@ -1,0 +1,15 @@
+Make a Go version of 2048 game using Test-Driven Development
+Requirements:
+- Based on a game of 2048
+- 4x4 board
+- User's only inputs are up, down, left or right
+- After each input if there is any changes on the board, another non number cell pops up as the lowest number
+
+Nice to have:
+- A customizable board
+- A customizable game conditions, like:
+    - How many cells pops up on the start
+    - How many cells pops up after user input
+    - Winning condition
+- Menu screen
+- Input using keyboard arrows
