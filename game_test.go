@@ -13,12 +13,12 @@ func TestInitializeBoard(t *testing.T) {
 	board := InitializeBoard(height, width, totalFilledCell)
 
 	if len(board) != height {
-		t.Logf("expected height: %d, got: %d", height, len(board))
+		t.Errorf("expected height: %d, got: %d", height, len(board))
 		t.Fail()
 	}
 
 	if len(board[0]) != width {
-		t.Logf("expected width: %d, got: %d", height, len(board[0]))
+		t.Errorf("expected width: %d, got: %d", height, len(board[0]))
 		t.Fail()
 	}
 
@@ -31,7 +31,7 @@ func TestInitializeBoard(t *testing.T) {
 		}
 	}
 	if count != totalFilledCell {
-		t.Logf("expected filled cells: %d, got: %d", totalFilledCell, count)
+		t.Errorf("expected filled cells: %d, got: %d", totalFilledCell, count)
 		t.Fail()
 	}
 }
@@ -53,7 +53,7 @@ func TestMergeLeft(t *testing.T) {
 	board = MergeLeft(board)
 
 	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Logf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
 		t.Fail()
 	}
 }
@@ -75,7 +75,7 @@ func TestMergeRight(t *testing.T) {
 	board = MergeRight(board)
 
 	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Logf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
 		t.Fail()
 	}
 }
@@ -97,7 +97,7 @@ func TestMergeUp(t *testing.T) {
 	board = MergeUp(board)
 
 	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Logf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
 		t.Fail()
 	}
 }
@@ -119,7 +119,7 @@ func TestMergeDown(t *testing.T) {
 	board = MergeDown(board)
 
 	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Logf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
 		t.Fail()
 	}
 }
@@ -139,7 +139,7 @@ func TestMirror(t *testing.T) {
 	board = Mirror(board)
 
 	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Logf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
 		t.Fail()
 	}
 }
@@ -159,7 +159,7 @@ func TestTranspose(t *testing.T) {
 	board = Transpose(board)
 
 	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Logf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
 		t.Fail()
 	}
 }
