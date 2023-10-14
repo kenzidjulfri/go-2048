@@ -9,7 +9,7 @@ func TestInitializeBoard(t *testing.T) {
 	height := 4
 	width := 4
 	totalFilledCells := 2
-	b := &Board{height, width, 0, make([][]int, 0)}
+	b := &Board{height, width, make([][]int, 0)}
 
 	b.InitializeBoard(totalFilledCells)
 

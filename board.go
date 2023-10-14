@@ -14,7 +14,6 @@ type Merger interface{
 
 type Board struct {
 	height, width int
-	mineCount int
 	board [][]int
 }
 
