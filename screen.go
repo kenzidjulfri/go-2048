@@ -5,8 +5,8 @@ import (
 	"io"
 )
 
-func PrintBoard(output io.Writer, board [][]int) {
-	for y, rows := range board {
+func PrintBoard(output io.Writer, b *Board) {
+	for y, rows := range b.board {
 		line := ""
 		for x, cell := range rows {
 			if x != 0 {
@@ -28,7 +28,7 @@ func PrintBoard(output io.Writer, board [][]int) {
 			line += "----"
 		}
 		fmt.Fprintln(output)
-		if y != len(board) - 1 {
+		if y != len(b.board) - 1 {
 			fmt.Fprintln(output, line)
 		}
 	}

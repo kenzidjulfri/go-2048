@@ -1,3 +1,3 @@
-module kenzidjulfri.com/go-2048
+module github.com/kenzidjulfri/go-2048
 
 go 1.20

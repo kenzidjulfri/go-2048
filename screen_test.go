@@ -6,7 +6,8 @@ import (
 )
 
 func TestPrintBoard(t *testing.T) {
-	board:= [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{0,2,0,0},
 		{0,32,2,0},
 		{4,2,1024,2},
@@ -22,20 +23,9 @@ func TestPrintBoard(t *testing.T) {
 
 	var output bytes.Buffer
 
-	PrintBoard(&output, board)
+	PrintBoard(&output, b)
 
 	if expected != output.String() {
 		t.Errorf("expected filled cells:\n%s\ngot:\n%s", expected, output.String())
-		t.Fail()
 	}
-}
-
-func TestProcessCommand_OK(t *testing.T) {
-	// tt := []string{"up","down","left","right"}
-
-	// for _, tc := range tt {
-	// 	ProcessCommand(tc)
-
-	// 	// mock/stub the Merge
-	// }
 }

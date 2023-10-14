@@ -8,18 +8,17 @@ import (
 func TestInitializeBoard(t *testing.T) {
 	height := 4
 	width := 4
-	totalFilledCell := 2
+	totalFilledCells := 2
+	b := &Board{height, width, 0, make([][]int, 0)}
 
-	board := InitializeBoard(height, width, totalFilledCell)
+	board := b.InitializeBoard(totalFilledCells)
 
 	if len(board) != height {
 		t.Errorf("expected height: %d, got: %d", height, len(board))
-		t.Fail()
 	}
 
 	if len(board[0]) != width {
 		t.Errorf("expected width: %d, got: %d", height, len(board[0]))
-		t.Fail()
 	}
 
 	count := 0
@@ -30,14 +29,14 @@ func TestInitializeBoard(t *testing.T) {
 			}
 		}
 	}
-	if count != totalFilledCell {
-		t.Errorf("expected filled cells: %d, got: %d", totalFilledCell, count)
-		t.Fail()
+	if count != totalFilledCells {
+		t.Errorf("expected filled cells: %d, got: %d", totalFilledCells, count)
 	}
 }
 
 func TestMergeLeft(t *testing.T) {
-	board := [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{2,0,2,0}, // check if merging 2 of the same number ignore 0s
 		{2,2,2,0}, // check if merging 3 of the same number will prioritize the first twos on the same direction
 		{2,2,2,2}, // check if merging 4 of the same number will have the position right
@@ -50,16 +49,16 @@ func TestMergeLeft(t *testing.T) {
 		{4,4,8,0},
 	}
 
-	board = MergeLeft(board)
+	b.MergeLeft()
 
-	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
-		t.Fail()
+	if !reflect.DeepEqual(expectedBoard, b.board) {
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
 	}
 }
 
 func TestMergeRight(t *testing.T) {
-	board := [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{2,0,2,0},
 		{2,2,2,0},
 		{2,2,2,2},
@@ -72,16 +71,16 @@ func TestMergeRight(t *testing.T) {
 		{0,4,4,8},
 	}
 
-	board = MergeRight(board)
+	b.MergeRight()
 
-	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
-		t.Fail()
+	if !reflect.DeepEqual(expectedBoard, b.board) {
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
 	}
 }
 
 func TestMergeUp(t *testing.T) {
-	board := [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{2,0,2,0},
 		{2,2,2,0},
 		{2,2,2,2},
@@ -94,16 +93,16 @@ func TestMergeUp(t *testing.T) {
 		{0,0,0,0},
 	}
 
-	board = MergeUp(board)
+	b.MergeUp()
 
-	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
-		t.Fail()
+	if !reflect.DeepEqual(expectedBoard, b.board) {
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
 	}
 }
 
 func TestMergeDown(t *testing.T) {
-	board := [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{2,0,2,0},
 		{2,2,2,0},
 		{2,2,2,2},
@@ -116,16 +115,16 @@ func TestMergeDown(t *testing.T) {
 		{4,4,4,8},
 	}
 
-	board = MergeDown(board)
+	b.MergeDown()
 
-	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
-		t.Fail()
+	if !reflect.DeepEqual(expectedBoard, b.board) {
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
 	}
 }
 
 func TestMirror(t *testing.T) {
-	board := [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{1,2,3},
 		{4,5,6},
 		{7,8,9},
@@ -136,16 +135,16 @@ func TestMirror(t *testing.T) {
 		{9,8,7},
 	}
 
-	board = Mirror(board)
+	b.mirror()
 
-	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
-		t.Fail()
+	if !reflect.DeepEqual(expectedBoard, b.board) {
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
 	}
 }
 
 func TestTranspose(t *testing.T) {
-	board := [][]int{
+	b := &Board{}
+	b.board = [][]int{
 		{1,2,3},
 		{4,5,6},
 		{7,8,9},
@@ -156,10 +155,9 @@ func TestTranspose(t *testing.T) {
 		{3,6,9},
 	}
 
-	board = Transpose(board)
+	b.transpose()
 
-	if !reflect.DeepEqual(expectedBoard, board) {
-		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, board)
-		t.Fail()
+	if !reflect.DeepEqual(expectedBoard, b.board) {
+		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
 	}
 }
