@@ -4,10 +4,10 @@ D - Initialize board by filling two different random cells with the number 2
     - Would be nice if it can be customized
 D - Filled cells can merge if the number match
 D - Filled cells will not merge if the number doesn't match, they will be stacked according to the directions
-- If changes occured to the board, then another unfilled cells will be filled with the number 2
+D - If changes occured to the board, then another unfilled cells will be filled with the number 2
     - Would be nice if it can be customized
-- User input up, down, left, right
-- User wins if there is a number 2048 inside one of the cells
+D - User input up, down, left, right
+D, Untested - User wins if there is a number 2048 inside one of the cells
     - Would be nice if it can be customized
-- User loses if the board cannot be filled with new number 2
+D - User loses if the board cannot be filled with new number 2
     - Improvement: User loses if the board is fully filled up with numbers that cannot be merged

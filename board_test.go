@@ -6,19 +6,17 @@ import (
 )
 
 func TestInitializeBoard(t *testing.T) {
-	height := 4
-	width := 4
-	totalFilledCells := 2
-	b := &Board{height, width, make([][]int, 0)}
+	initialFillCount := 2
+	b := &Board{height: 4, width: 4}
 
-	b.InitializeBoard(totalFilledCells)
+	b.InitializeBoard(initialFillCount)
 
-	if len(b.board) != height {
-		t.Errorf("expected height: %d, got: %d", height, len(b.board))
+	if len(b.board) != b.height {
+		t.Errorf("expected height: %d, got: %d", b.height, len(b.board))
 	}
 
-	if len(b.board[0]) != width {
-		t.Errorf("expected width: %d, got: %d", height, len(b.board[0]))
+	if len(b.board[0]) != b.width {
+		t.Errorf("expected width: %d, got: %d", b.height, len(b.board[0]))
 	}
 
 	count := 0
@@ -29,8 +27,8 @@ func TestInitializeBoard(t *testing.T) {
 			}
 		}
 	}
-	if count != totalFilledCells {
-		t.Errorf("expected filled cells: %d, got: %d", totalFilledCells, count)
+	if count != initialFillCount {
+		t.Errorf("expected filled cells: %d, got: %d", initialFillCount, count)
 	}
 }
 
@@ -143,11 +141,12 @@ func TestMirror(t *testing.T) {
 }
 
 func TestTranspose(t *testing.T) {
-	b := &Board{}
-	b.board = [][]int{
-		{1,2,3},
-		{4,5,6},
-		{7,8,9},
+	b := &Board{
+		board: [][]int{
+			{1,2,3},
+			{4,5,6},
+			{7,8,9},
+		},
 	}
 	expectedBoard := [][]int{
 		{1,4,7},
@@ -159,5 +158,37 @@ func TestTranspose(t *testing.T) {
 
 	if !reflect.DeepEqual(expectedBoard, b.board) {
 		t.Errorf("expected board:\n%v\n\ngot:\n%v", expectedBoard, b.board)
+	}
+}
+
+func TestCanFill_True(t *testing.T) {
+	b := &Board{
+		fillCount: 1,
+		board: [][]int{
+			{1,2,3},
+			{4,5,6},
+			{7,8,0},
+		},
+	}
+	
+	result := b.CanFill()
+	if !result {
+		t.Errorf("expected board could still be filled")
+	}
+}
+
+func TestCanFill_False(t *testing.T) {
+	b := &Board{
+		fillCount: 2,
+		board: [][]int{
+			{1,2,3},
+			{4,5,6},
+			{7,8,0},
+		},
+	}
+	
+	result := b.CanFill()
+	if result {
+		t.Errorf("expected board could not be filled anymore")
 	}
 }

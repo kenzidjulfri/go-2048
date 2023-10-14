@@ -13,12 +13,13 @@ type Merger interface{
 }
 
 type Board struct {
-	height, width int
+	height, width, fillCount int
 	board [][]int
 }
 
-func (b *Board) InitializeBoard(totalFilledCell int) {
-	b.board = FillCells(createBoard(b.height, b.width), totalFilledCell)
+func (b *Board) InitializeBoard(initialFillCount int) {
+	b.board = createBoard(b.height, b.width)
+	b.FillCells(initialFillCount)
 }
 
 func createBoard(height, width int) [][]int {
@@ -30,19 +31,33 @@ func createBoard(height, width int) [][]int {
 	return board
 }
 
-func FillCells(board [][]int, totalFilledCells int) [][]int {
+func (b *Board) FillCells(fillCount int) {
 	random := rand.New(rand.NewSource(time.Now().Unix()))
-	for i := 0; i < totalFilledCells; {
-		y := random.Intn(len(board))
-		x := random.Intn(len(board[y]))
+	for i := 0; i < fillCount; {
+		y := random.Intn(len(b.board))
+		x := random.Intn(len(b.board[y]))
 
-		if (board[y][x] == 0) {
+		if (b.board[y][x] == 0) {
 			i++
-			board[y][x] = 2
+			b.board[y][x] = 2
+		}
+	}
+}
+
+func (b *Board) CanFill() bool {
+	count := 0
+	for _, row := range b.board {
+		for _, cell := range row {
+			if cell == 0 {
+				count++
+				if count >= b.fillCount {
+					return true
+				}
+			}
 		}
 	}
 
-	return board
+	return false
 }
 
 func (b *Board) MergeLeft() {

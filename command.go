@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"strings"
 )
 
@@ -15,6 +17,9 @@ func ProcessCommand(m Merger, command string) {
 		m.MergeUp()
 	case "down":
 		m.MergeDown()
+	case "exit":
+		fmt.Println("Exiting program")
+		os.Exit(0)
 	default:
 		return;
 	}
