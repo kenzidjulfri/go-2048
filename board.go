@@ -18,11 +18,11 @@ type Board struct {
 	board [][]int
 }
 
-func (b *Board) InitializeBoard(totalFilledCell int) [][]int {
-	return FillCells(CreateBoard(b.height, b.width), totalFilledCell)
+func (b *Board) InitializeBoard(totalFilledCell int) {
+	b.board = FillCells(createBoard(b.height, b.width), totalFilledCell)
 }
 
-func CreateBoard(height, width int) [][]int {
+func createBoard(height, width int) [][]int {
 	board := make([][]int, height)
 	for y := range board {
 		board[y] = make([]int, width)
@@ -47,7 +47,7 @@ func FillCells(board [][]int, totalFilledCells int) [][]int {
 }
 
 func (b *Board) MergeLeft() {
-	newBoard := CreateBoard(len(b.board), len(b.board[0]))
+	newBoard := createBoard(len(b.board), len(b.board[0]))
 
 	for y := 0; y < len(b.board); y++ {
 		curPos := 0

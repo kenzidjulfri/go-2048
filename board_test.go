@@ -11,20 +11,20 @@ func TestInitializeBoard(t *testing.T) {
 	totalFilledCells := 2
 	b := &Board{height, width, 0, make([][]int, 0)}
 
-	board := b.InitializeBoard(totalFilledCells)
+	b.InitializeBoard(totalFilledCells)
 
-	if len(board) != height {
-		t.Errorf("expected height: %d, got: %d", height, len(board))
+	if len(b.board) != height {
+		t.Errorf("expected height: %d, got: %d", height, len(b.board))
 	}
 
-	if len(board[0]) != width {
-		t.Errorf("expected width: %d, got: %d", height, len(board[0]))
+	if len(b.board[0]) != width {
+		t.Errorf("expected width: %d, got: %d", height, len(b.board[0]))
 	}
 
 	count := 0
-	for y := range board {
-		for x := range board[y] {
-			if board[y][x] != 0 {
+	for y := range b.board {
+		for x := range b.board[y] {
+			if b.board[y][x] != 0 {
 				count++
 			}
 		}
